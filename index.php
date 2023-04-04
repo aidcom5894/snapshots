@@ -1,4 +1,8 @@
+<?php 
+include('configuration/db_config.php');
+include('configuration/base_url.php');
 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,6 +42,8 @@
   </head>
 
   <body>
+
+    <a href="registration.php" style="text-decoration: none;"><h4 style="color:#C70039;">Click to Register</h4></a>
 
     <div class="main-page-wrapper">
       <!-- 
