@@ -13,7 +13,7 @@ if(!$config)
 }
 else
 {
-	echo "Snapshot Successfully Connected to Database";
+	echo "";
 }
 
 ?>
