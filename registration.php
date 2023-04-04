@@ -20,7 +20,7 @@ include('configuration/db_config.php');
     
     <div class="container" style="margin-top: 36px;">
 
-        <form method="POST" action="login.php" enctype="multipart/form-data">
+        <form method="POST" action="#" enctype="multipart/form-data">
 
         <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label"><strong>Username:</strong></label>
@@ -70,6 +70,43 @@ include('configuration/db_config.php');
       $username = $_POST['username'];
       $email = $_POST['email'];
       $contact = $_POST['contact'];
+      $password = $_POST['password'];
+      $role = "user";
+      $avatar = $_POST['avatar'];
+
+      $targetFolder = "uploads/";
+      $fileOrgName = $_FILES['avatar']['name'];
+      $fileTempName = $_FILES['avatar']['tmp_name'];
+      $imageAddress = $base_url.$targetFolder.$fileOrgName;
+
+      $registerUser = mysqli_query($config,"INSERT INTO user_registration(admin_name,admin_email,admin_contact,admin_password,admin_role,admin_avatar) VALUES('$username','$email','$contact','$password','$role',' $imageAddress')");
+
+      $checkmail = mysqli_query($config,"SELECT admin_email FROM user_registration");
+
+
+      if(mysqli_num_rows($checkmail)>0)
+      {
+        echo "<script>alert('Email already exist. Please Login to Access Dashboard')</script>";
+      }
+
+      
+      elseif($registerUser)
+      {
+         echo "<script>alert('User Registration Successful')
+            window.location.href='registration.php';
+        </script>";
+        move_uploaded_file($fileTempName,$targetFolder.$fileOrgName);
+        
+
+      }
+      else
+      {
+        echo "<script>alert('Nothing Found')</script>";
+      }
+      
+
+
+
     }
 
 ?>
